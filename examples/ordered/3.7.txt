@@ -1,0 +1,7 @@
+3
+#mode2 : 20ms
+# EXAMPLE FROM stackexchange TO CHECK VALIDY FROM MAP
+
+5 2 8
+4 1 7
+0 3 6

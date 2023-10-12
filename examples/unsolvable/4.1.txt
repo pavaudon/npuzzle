@@ -1,0 +1,8 @@
+# SNAIL
+# Arret au bout de 2min, pas resolut
+# NOT SOLVABLE
+4
+0 10 5 7
+11 14 4 8
+1 2 6 13
+12 3 15 9

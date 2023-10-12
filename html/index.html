@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .btn:focus {
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+<div id="loading" class="d-none position-absolute w-100 h-100 d-flex justify-content-center align-items-center bg-light"
+     style="z-index: 1051; opacity: 0.7;">
+    <div class="spinner-border spinner-border-lg" style="width: 10rem; height: 10rem;"></div>
+</div>
+<div class="text-center row p-3 m-0">
+    <div class="col-3 border rounded p-3 ">
+        <h3 class="mb-5">Change the map</h3>
+        <button type="button" class="mx-3 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#import-modal">
+            Import a map
+        </button>
+        <hr>
+        <div class=" form-check form-switch my-2">
+            <input class="form-check-input" type="checkbox" id="solvable">
+            <label class="form-check-label" for="solvable">Solvable</label>
+        </div>
+
+        <div class="input-group my-2">
+            <span class="input-group-text">Size & iteration</span>
+            <input id="map-size" type="text" width="" class="form-control" placeholder="Size" aria-label="Size"
+                   aria-describedby="basic-addon1">
+            <input id="map-iteration" type="text" width="" value="10000" class="form-control" placeholder="Iteration"
+                   aria-label="Size" aria-describedby="basic-addon1">
+        </div>
+        <div class=" form-check form-switch my-2">
+            <input class="form-check-input" type="checkbox" id="sag" >
+            <label class="form-check-label" for="solvable">start the resolution after the generation ? </label>
+        </div>
+        <button type="button" class="btn btn-secondary my-2" onclick="generateMap()">Generate a new map</button>
+        <hr>
+        <button type="button" class="btn btn-secondary my-2" onclick="ImportMapFromHistoric(0)">Get last Map </button>
+        <button type="button" class="btn btn-secondary my-2" onclick="Historic()">Historic map </button>
+    </div>
+    <div class=" col-6 p-3 justify-content-around">
+        <button id="start" type="button" class="btn btn-success my-2" onclick="start()">START</button>
+
+        <div class="d-flex justify-content-center">
+            <div id="my-map" class="d-flex flex-wrap  border rounded p-2">
+            </div>
+        </div>
+        <div class="d-flex justify-content-center my-2">
+            <div class="card w-50">
+                <div class="card-body">
+                    <div>
+                        Moves counter : <span id="nb-moves">0</span>
+                    </div>
+                    <div>
+                        Total number of moves : <span id="cost">0</span>
+                    </div>
+                    <div>
+                        Time to resolve by the server : <span id="timer"></span>
+                    </div>
+                    <div>
+                        Heuristic : <span id="heuristic"></span>
+                    </div>
+                    <div>
+                        Complexity time (Size of closed at the end) : <span id="complexity-time">0</span>
+                    </div>
+                    <div>
+                        Complexity size (Max size of open) : <span id="complexity-size">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3 border rounded p-3 ">
+        <h3 class="mb-5">Change the conf</h3>
+        <div class="input-group mb-3 w-100">
+            <span class="input-group-text">Heuristic</span>
+            <select id="heuristic-mode" class="form-select">
+                <option value="0">Linear conflict</option>
+                <option value="1">Manhattan</option>
+                <option value="2">Misplaced Tiles</option>
+                <option value="3">Diagonal conflict</option>
+                <option value="4">Corner Tiles</option>
+                <option value="5">Combi LC (1) + DC (3) + CT (4)</option>
+                <option value="6">Combi DC (3) + CT (4)</option>
+                <option value="7">MULTITHREAD WITH ALL HEURISTIC</option>
+            </select>
+        </div>
+        <div class="input-group mb-3 w-100">
+            <span class="input-group-text">Sort Mode</span>
+            <select id="sort-mode" class="form-select">
+                <option value="0">traditional (white in bot-right)</option>
+                <option value="1">snail</option>
+            </select>
+        </div>
+        <div class="input-group my-2">
+            <span class="input-group-text">Sleep time (in ms)</span>
+            <input id="sleep-time" type="number" width="" class="form-control" step="100" value="250"  placeholder="in millisecond">
+        </div>
+        <div class=" form-check form-switch my-2">
+            <input class="form-check-input" type="checkbox" id="timer-chkb">
+            <label class="form-check-label" for="solvable">Print the timer at the end of résolution</label>
+        </div>
+        <button type="button" class="btn btn-secondary my-2" onclick="updateTheConf()">Update new conf</button>
+    </div>
+</div>
+<div class="border border-danger m-2 p-1 rounded">
+    LOG:
+    <div id="log" class="text-danger"></div>
+</div>
+<div class="modal fade" id="import-modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Import a new puzzle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group" style="height: calc(100vh - 300px)">
+                    <textarea id="import-value" class="form-control" aria-label="With textarea"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" onclick="importMap(true)">Send Snail</button>
+                <button type="button" class="btn btn-success" onclick="importMap(false)">Send Traditional</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="maps-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Last Maps</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="all-maps">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="index.js"></script>
+</body>
+</html>

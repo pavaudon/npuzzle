@@ -1,0 +1,8 @@
+# SNAIL
+# BUG SUR LE CHECK DE MAP
+# 61 moves en snail
+#  87 moves en trad  x)
+3
+1 2 3
+8 0 4
+7 6 5

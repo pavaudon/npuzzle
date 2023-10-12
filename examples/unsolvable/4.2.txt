@@ -1,0 +1,8 @@
+# PONIES
+# J'ai attendu l'algo 20 minutes, Open est de 27000 et close de 26000
+#toujours aucune solution. Peut etre que c'etait une map pas bonne en ordered et pas en snail.
+4
+ 0 10 5 7
+11 14 4 8
+ 1 2 6 13
+12 3 15 9

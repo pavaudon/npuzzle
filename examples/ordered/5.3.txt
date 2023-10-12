@@ -1,0 +1,11 @@
+5
+# Manhattan
+# 162083ms (2min42) : 2ST/Loop & 1000ST MAX
+# Map
+# 15393ms (15s) : 1 main Thread
+# Algo DURATION TO RESOLVE with map: 1993ms (mode 2)
+8 3 5 4 22
+15 0 23 19 18
+14 24 13 10 20
+2 12 11 21 6
+1 16 17 9 7

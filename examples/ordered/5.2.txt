@@ -1,0 +1,19 @@
+5
+# Manhattan
+# 125128ms (2min4s) : 1 main Thread
+# 149647ms (2min30s) : 2ST/Loop & 10ST MAX
+# 162921ms (2min42s) : 1ST/Loop & 10ST MAX
+# 145665ms (2min25s) : 1ST/Loop & 5ST MAX
+# Misplaced Tiles
+# 61641ms (1min1s)  : 1 main Thread
+# 62280 : 1MT + float
+# 69252ms (1min9s) : 1ST/Loop & 5ST MAX
+# mode 4
+# 15575ms (15s) : 1 main Thread
+# 15393ms (15s) : 1 main Thread
+# Algo DURATION TO RESOLVE with map: 1192ms (mode 4)
+24 19 22 9 10
+2 14 3 18 21
+23 12 16 1 0
+7 8 4 17 13
+20 11 15 6 5

@@ -1,0 +1,10 @@
+5
+# manathan :> 5 min (ctrl+c): 2ST/Loop & 1000ST MAX
+# mode 4 :> 1 min 37 secondes : 2ST/Loop & 1000ST MAX
+# Algo DURATION TO RESOLVE : 115487ms
+# Algo DURATION TO RESOLVE with map: 3711ms (mode 4)
+16 20 13 8 14
+3 21 18 11 2
+7 4 19 10 5
+17 0 1 23 24
+15 12 22 6 9

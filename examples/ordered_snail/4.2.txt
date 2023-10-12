@@ -1,0 +1,12 @@
+4
+# 8 sec 1T
+# 15 sec 1T mode2
+# 8 sec 1T mode1
+# long > 1min20 1T mode0
+# 3.6 sec 1T mode3
+# 2.2 sec 1T mode4
+# long > 1min20 1T mode5
+7 3 13 1
+2 14 10 11
+12 6 0 5
+15 4 8 9

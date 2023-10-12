@@ -1,0 +1,9 @@
+# this is a comment
+# SNAIL MAP
+# SUCCESS WITH 15 moves
+# Algo DURATION TO RESOLVE : 19ms
+# TOTAL DURATION TO RESOLVE : 29ms
+3
+3 2 6 #another comment
+1 4 0
+8 7 5
